@@ -1,0 +1,23 @@
+{
+  "name": "crypto-crash-backend",
+  "version": "1.0.0",
+  "description": "Backend for Crypto Crash game (Crash Game with Crypto, WebSockets, Provably Fair)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "seed": "node scripts/seed.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^17.2.1",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.5",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

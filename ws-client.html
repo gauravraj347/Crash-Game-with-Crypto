@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crypto Crash WebSocket Client</title>
+</head>
+<body>
+  <h2>Crypto Crash WebSocket Demo</h2>
+  <label>Player ID: <input id="playerId" type="text" /></label>
+  <button onclick="sendCashout()">Cashout</button>
+  <pre id="log" style="background:#eee; height:300px; overflow:auto;"></pre>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script>
+    const log = document.getElementById('log');
+    function append(msg) {
+      log.textContent += msg + '\n';
+      log.scrollTop = log.scrollHeight;
+    }
+    const socket = io('ws://localhost:3000');
+    socket.on('connect', () => append('Connected'));
+    socket.on('round_start', data => append('Round Start: ' + JSON.stringify(data)));
+    socket.on('multiplier_update', data => append('Multiplier: ' + data.multiplier.toFixed(2)));
+    socket.on('player_cashout', data => append('Player Cashout: ' + JSON.stringify(data)));
+    socket.on('round_crash', data => append('Round Crash: ' + JSON.stringify(data)));
+    socket.on('cashout_success', data => append('Cashout Success: ' + JSON.stringify(data)));
+    socket.on('cashout_error', data => append('Cashout Error: ' + JSON.stringify(data)));
+    function sendCashout() {
+      const playerId = document.getElementById('playerId').value.trim();
+      if (!playerId) return alert('Enter Player ID');
+      socket.emit('cashout', { playerId });
+    }
+  </script>
+</body>
+</html>
