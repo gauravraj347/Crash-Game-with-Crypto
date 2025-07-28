@@ -19,6 +19,10 @@ const gameRoutes = require('./routes/gameRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
 const { setCrashGameInstance } = require('../src/controllers/gameController');
 
+
+app.get("/", (req, res) => {
+  res.send("Backend streaming");
+});
 // API routes
 app.use('/api/player', playerRoutes);
 app.use('/api/game', gameRoutes);
